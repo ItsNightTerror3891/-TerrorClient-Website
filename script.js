@@ -9,25 +9,30 @@ function resize() {
     H = canvas.height = window.innerHeight;
     terrainCanvas.width = W;
     terrainCanvas.height = H;
-    drawTerrainStatic();
+    if (texLoaded) drawTerrainStatic();
 }
 resize();
 window.addEventListener('resize', resize);
 
 const BS = 16;
-const colors = {
-    grass: ['#4a7c3f','#3d6b34','#5a8f4f','#2d5a24'],
-    dirt: ['#6b4c2a','#5a3e22','#7a5c32','#4d341c'],
-    stone: ['#7a7a7a','#6a6a6a','#8a8a8a','#5a5a5a']
-};
+const textures = {};
+let texLoaded = false;
 
-function drawBlock(x, y, c) {
-    const idx = (Math.floor(x/BS)*7 + Math.floor(y/BS)*13) % c.length;
-    terrainCtx.fillStyle = c[idx];
-    terrainCtx.fillRect(x, y, BS, BS);
-    terrainCtx.strokeStyle = 'rgba(0,0,0,0.15)';
-    terrainCtx.lineWidth = 1;
-    terrainCtx.strokeRect(x, y, BS, BS);
+function loadTextures() {
+    let loaded = 0;
+    const names = ['grass', 'dirt', 'stone'];
+    names.forEach(name => {
+        const img = new Image();
+        img.onload = () => {
+            loaded++;
+            if (loaded === names.length) {
+                texLoaded = true;
+                drawTerrainStatic();
+            }
+        };
+        img.src = name + '.png';
+        textures[name] = img;
+    });
 }
 
 function drawTerrainStatic() {
@@ -36,76 +41,52 @@ function drawTerrainStatic() {
     const grassY = groundY - BS * 2;
     const dirtY = groundY - BS;
 
-    for (let x = 0; x <= W + BS; x += BS) drawBlock(x, grassY, colors.grass);
-    for (let x = 0; x <= W + BS; x += BS) drawBlock(x, dirtY, colors.dirt);
+    for (let x = 0; x <= W + BS; x += BS)
+        terrainCtx.drawImage(textures.grass, x, grassY, BS, BS);
+    for (let x = 0; x <= W + BS; x += BS)
+        terrainCtx.drawImage(textures.dirt, x, dirtY, BS, BS);
     for (let y = groundY; y < H; y += BS)
-        for (let x = 0; x <= W + BS; x += BS) drawBlock(x, y, colors.stone);
-
-    terrainCtx.strokeStyle = '#5a8f4f';
-    terrainCtx.lineWidth = 2;
-    for (let x = 0; x < W; x += 24) {
-        const bx = Math.floor(x/BS)*BS + BS/2;
-        terrainCtx.beginPath();
-        terrainCtx.moveTo(bx, grassY);
-        terrainCtx.quadraticCurveTo(bx, grassY-10, bx, grassY-18);
-        terrainCtx.stroke();
-        terrainCtx.beginPath();
-        terrainCtx.moveTo(bx-4, grassY);
-        terrainCtx.quadraticCurveTo(bx-4, grassY-8, bx-4, grassY-14);
-        terrainCtx.stroke();
-    }
-
-    terrainCtx.fillStyle = 'rgba(200,210,230,0.06)';
-    for (let i = 0; i < 4; i++) {
-        const cy = 60 + i*50 + Math.sin(i*2)*20;
-        terrainCtx.beginPath();
-        terrainCtx.ellipse(W*0.2+i*80, cy, 80+i*20, 20+i*5, 0, 0, Math.PI*2);
-        terrainCtx.fill();
-        terrainCtx.beginPath();
-        terrainCtx.ellipse(W*0.2+i*80-40, cy+5, 50, 15, 0, 0, Math.PI*2);
-        terrainCtx.fill();
-        terrainCtx.beginPath();
-        terrainCtx.ellipse(W*0.2+i*80+40, cy+3, 45, 12, 0, 0, Math.PI*2);
-        terrainCtx.fill();
-    }
+        for (let x = 0; x <= W + BS; x += BS)
+            terrainCtx.drawImage(textures.stone, x, y, BS, BS);
 }
 
 function render(time) {
     const groundY = Math.floor(H * 0.75);
     const skyGrad = ctx.createLinearGradient(0, 0, 0, groundY);
-    const t = (Math.sin(time*0.0003)*0.5+0.5)*0.3+0.1;
-    skyGrad.addColorStop(0, `hsl(230, 30%, ${8+t*8}%)`);
-    skyGrad.addColorStop(0.5, `hsl(220, 25%, ${10+t*6}%)`);
-    skyGrad.addColorStop(1, `hsl(210, 20%, ${12+t*4}%)`);
+    const t = (Math.sin(time * 0.0003) * 0.5 + 0.5) * 0.3 + 0.1;
+    skyGrad.addColorStop(0, `hsl(230, 30%, ${8 + t * 8}%)`);
+    skyGrad.addColorStop(0.5, `hsl(220, 25%, ${10 + t * 6}%)`);
+    skyGrad.addColorStop(1, `hsl(210, 20%, ${12 + t * 4}%)`);
     ctx.fillStyle = skyGrad;
     ctx.fillRect(0, 0, W, groundY);
 
     if (!render.stars) {
         render.stars = [];
         for (let i = 0; i < 80; i++) render.stars.push({
-            x: Math.random()*W, y: Math.random()*groundY*0.7,
-            r: Math.random()*1.5+0.5, sp: Math.random()*0.5+0.2
+            x: Math.random() * W, y: Math.random() * groundY * 0.7,
+            r: Math.random() * 1.5 + 0.5, sp: Math.random() * 0.5 + 0.2
         });
     }
     render.stars.forEach(s => {
-        ctx.globalAlpha = (Math.sin(time*0.001*s.sp+s.x)*0.3+0.7)*0.6;
+        ctx.globalAlpha = (Math.sin(time * 0.001 * s.sp + s.x) * 0.3 + 0.7) * 0.6;
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
     });
     ctx.globalAlpha = 1;
 
-    ctx.drawImage(terrainCanvas, 0, 0);
+    if (texLoaded) ctx.drawImage(terrainCanvas, 0, 0);
     requestAnimationFrame(render);
 }
 requestAnimationFrame(render);
+loadTextures();
 
 const particleContainer = document.getElementById('particles');
-const bc = ['#44bd32','#3d6b34','#6b4c2a','#7a7a7a','#f0c040','#4070f0','#c04040'];
+const bc = ['#44bd32', '#3d6b34', '#6b4c2a', '#7a7a7a', '#f0c040', '#4070f0', '#c04040'];
 for (let i = 0; i < 12; i++) {
     const el = document.createElement('div');
     el.className = 'particle';
-    const s = 16+Math.random()*20;
+    const s = 16 + Math.random() * 20;
     el.style.cssText = `width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${bc[i%7]};border-radius:2px;border:1px solid rgba(0,0,0,0.2);animation-duration:${15+Math.random()*20}s;animation-delay:${Math.random()*20}s`;
     particleContainer.appendChild(el);
 }
