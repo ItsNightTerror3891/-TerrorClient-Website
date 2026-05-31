@@ -10,18 +10,16 @@ function resize() {
 resize();
 window.addEventListener('resize', resize);
 
-// Terrain
 const TERRAIN_BLOCK_SIZE = 16;
 const terrainColors = {
-    sky: ['#1a1a2e', '#16213e', '#0f3460', '#1a1a2e'],
     grass: ['#4a7c3f', '#3d6b34', '#5a8f4f', '#2d5a24'],
     dirt: ['#6b4c2a', '#5a3e22', '#7a5c32', '#4d341c'],
     stone: ['#7a7a7a', '#6a6a6a', '#8a8a8a', '#5a5a5a']
 };
 
 function drawBlock(x, y, size, colors) {
-    const c = colors[Math.floor(Math.random() * colors.length)];
-    ctx.fillStyle = c;
+    const idx = (Math.floor(x / size) * 7 + Math.floor(y / size) * 13) % colors.length;
+    ctx.fillStyle = colors[idx];
     ctx.fillRect(x, y, size, size);
     ctx.strokeStyle = 'rgba(0,0,0,0.15)';
     ctx.lineWidth = 1;
@@ -30,9 +28,6 @@ function drawBlock(x, y, size, colors) {
 
 function drawTerrain(time) {
     const groundY = H * 0.75;
-    const cols = Math.ceil(W / TERRAIN_BLOCK_SIZE) + 2;
-
-    // Sky gradient
     const skyGrad = ctx.createLinearGradient(0, 0, 0, groundY);
     const t = (Math.sin(time * 0.0003) * 0.5 + 0.5) * 0.3 + 0.1;
     skyGrad.addColorStop(0, `hsl(230, 30%, ${8 + t * 8}%)`);
@@ -41,16 +36,13 @@ function drawTerrain(time) {
     ctx.fillStyle = skyGrad;
     ctx.fillRect(0, 0, W, groundY);
 
-    // Stars
     ctx.fillStyle = 'rgba(255,255,255,0.4)';
     if (!drawTerrain.stars) {
         drawTerrain.stars = [];
         for (let i = 0; i < 80; i++) {
             drawTerrain.stars.push({
-                x: Math.random() * W,
-                y: Math.random() * groundY * 0.7,
-                r: Math.random() * 1.5 + 0.5,
-                speed: Math.random() * 0.5 + 0.2
+                x: Math.random() * W, y: Math.random() * groundY * 0.7,
+                r: Math.random() * 1.5 + 0.5, speed: Math.random() * 0.5 + 0.2
             });
         }
     }
@@ -63,26 +55,18 @@ function drawTerrain(time) {
     });
     ctx.globalAlpha = 1;
 
-    // Grass layer
     const grassY = groundY - TERRAIN_BLOCK_SIZE * 2;
-    for (let x = 0; x <= W + TERRAIN_BLOCK_SIZE; x += TERRAIN_BLOCK_SIZE) {
+    for (let x = 0; x <= W + TERRAIN_BLOCK_SIZE; x += TERRAIN_BLOCK_SIZE)
         drawBlock(x, grassY, TERRAIN_BLOCK_SIZE, terrainColors.grass);
-    }
 
-    // Dirt layer
     const dirtY = groundY - TERRAIN_BLOCK_SIZE;
-    for (let x = 0; x <= W + TERRAIN_BLOCK_SIZE; x += TERRAIN_BLOCK_SIZE) {
+    for (let x = 0; x <= W + TERRAIN_BLOCK_SIZE; x += TERRAIN_BLOCK_SIZE)
         drawBlock(x, dirtY, TERRAIN_BLOCK_SIZE, terrainColors.dirt);
-    }
 
-    // Stone layer
-    for (let y = groundY; y < H; y += TERRAIN_BLOCK_SIZE) {
-        for (let x = 0; x <= W + TERRAIN_BLOCK_SIZE; x += TERRAIN_BLOCK_SIZE) {
+    for (let y = groundY; y < H; y += TERRAIN_BLOCK_SIZE)
+        for (let x = 0; x <= W + TERRAIN_BLOCK_SIZE; x += TERRAIN_BLOCK_SIZE)
             drawBlock(x, y, TERRAIN_BLOCK_SIZE, terrainColors.stone);
-        }
-    }
 
-    // Grass tufts
     ctx.strokeStyle = '#5a8f4f';
     ctx.lineWidth = 2;
     for (let x = 0; x < W; x += 24 + Math.sin(x * 0.5) * 8) {
@@ -99,7 +83,6 @@ function drawTerrain(time) {
         ctx.stroke();
     }
 
-    // Clouds
     ctx.fillStyle = 'rgba(200, 210, 230, 0.06)';
     for (let i = 0; i < 4; i++) {
         const cx = ((time * 0.02 + i * W * 0.3) % (W + 200)) - 100;
@@ -122,10 +105,8 @@ function render(time) {
 }
 requestAnimationFrame(render);
 
-
 // BLOCK PARTICLES
 const particleContainer = document.getElementById('particles');
-const blockChars = ['⬛', '🟩', '🟫', '⬜', '🟨', '🟦', '🟥'];
 const blockColors = ['#44bd32', '#3d6b34', '#6b4c2a', '#7a7a7a', '#f0c040', '#4070f0', '#c04040'];
 
 for (let i = 0; i < 12; i++) {
@@ -142,7 +123,6 @@ for (let i = 0; i < 12; i++) {
     el.style.animationDelay = (Math.random() * 20) + 's';
     particleContainer.appendChild(el);
 }
-
 
 // NAVBAR SCROLL
 const navbar = document.getElementById('navbar');
@@ -172,7 +152,6 @@ dots.forEach(d => {
 
 setInterval(() => goToSlide((currentSlide + 1) % dots.length), 5000);
 
-
 // COUNTER ANIMATION
 const counters = document.querySelectorAll('.stat-num');
 const observer = new IntersectionObserver((entries) => {
@@ -194,32 +173,14 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 counters.forEach(c => observer.observe(c));
 
-
 // CURSOR GLOW
 const glow = document.getElementById('cursorGlow');
 document.addEventListener('mousemove', (e) => {
     glow.style.left = e.clientX + 'px';
     glow.style.top = e.clientY + 'px';
 });
-
 document.addEventListener('mouseleave', () => glow.style.opacity = '0');
 document.addEventListener('mouseenter', () => glow.style.opacity = '1');
-
-// DOWNLOAD TRACKING
-document.querySelectorAll('.download-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const link = btn.getAttribute('href');
-        if (link && link.endsWith('.exe')) {
-            const a = document.createElement('a');
-            a.href = link;
-            a.download = 'TerrorClient-Setup.exe';
-            a.style.display = 'none';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
-    });
-});
 
 // REVEAL ON SCROLL
 const revealEls = document.querySelectorAll('.feature-card, .section-header, .download-card');
@@ -239,6 +200,3 @@ revealEls.forEach(el => {
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     revealObserver.observe(el);
 });
-
-console.log('%c⛏ TerrorClient Launcher', 'font-size:24px; color:#44bd32; font-weight:bold;');
-console.log('%cWebsite loaded. Ready to mine!', 'color:#888;');
