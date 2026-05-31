@@ -20,22 +20,6 @@ const col = {
     dirt: ['#6b4c2a','#5a3e22','#7a5c32','#4d341c'],
     stone: ['#7a7a7a','#6a6a6a','#8a8a8a','#5a5a5a']
 };
-const tex = { grass: null, dirt: null, stone: null };
-let fallback = true;
-
-function loadTex(name) {
-    const img = new Image();
-    img.onload = () => { tex[name] = img; checkReady(); };
-    img.onerror = () => checkReady();
-    img.src = name + '.png';
-}
-function checkReady() {
-    if (tex.grass && tex.dirt && tex.stone) {
-        fallback = !(tex.grass.complete && tex.dirt.complete && tex.stone.complete && tex.grass.naturalWidth > 0);
-        drawTerrain();
-    }
-}
-loadTex('grass'); loadTex('dirt'); loadTex('stone');
 
 function drawBlock(x, y, c) {
     const idx = (Math.floor(x/BS)*7 + Math.floor(y/BS)*13) % c.length;
@@ -51,20 +35,10 @@ function drawTerrain() {
     const groundY = Math.floor(H * 0.78);
     const grassY = groundY - BS * 2;
     const dirtY = groundY - BS;
-
-    for (let x = 0; x <= W + BS; x += BS) {
-        if (!fallback && tex.grass) terrainCtx.drawImage(tex.grass, x, grassY, BS, BS);
-        else drawBlock(x, grassY, col.grass);
-    }
-    for (let x = 0; x <= W + BS; x += BS) {
-        if (!fallback && tex.dirt) terrainCtx.drawImage(tex.dirt, x, dirtY, BS, BS);
-        else drawBlock(x, dirtY, col.dirt);
-    }
+    for (let x = 0; x <= W + BS; x += BS) drawBlock(x, grassY, col.grass);
+    for (let x = 0; x <= W + BS; x += BS) drawBlock(x, dirtY, col.dirt);
     for (let y = groundY; y < H; y += BS)
-        for (let x = 0; x <= W + BS; x += BS) {
-            if (!fallback && tex.stone) terrainCtx.drawImage(tex.stone, x, y, BS, BS);
-            else drawBlock(x, y, col.stone);
-        }
+        for (let x = 0; x <= W + BS; x += BS) drawBlock(x, y, col.stone);
 }
 
 function render(time) {
@@ -76,7 +50,6 @@ function render(time) {
     skyGrad.addColorStop(1, `hsl(210, 15%, ${22+t*6}%)`);
     ctx.fillStyle = skyGrad;
     ctx.fillRect(0, 0, W, groundY);
-
     if (!render.stars) {
         render.stars = [];
         for (let i = 0; i < 100; i++) render.stars.push({
@@ -92,7 +65,6 @@ function render(time) {
         ctx.fill();
     });
     ctx.globalAlpha = 1;
-
     ctx.drawImage(terrainCanvas, 0, 0);
     requestAnimationFrame(render);
 }
@@ -141,7 +113,7 @@ const observer = new IntersectionObserver((entries) => {
             observer.unobserve(e.target);
         }
     });
-}, { threshold: 0.1 });
+}, { threshold: 0.01 });
 counters.forEach(c => observer.observe(c));
 
 const glow = document.getElementById('cursorGlow');
