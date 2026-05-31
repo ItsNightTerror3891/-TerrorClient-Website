@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerrorClient Launcher</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="mcCanvas"></canvas>
+    <div id="particles"></div>
+
+    <nav id="navbar">
+        <div class="nav-inner">
+            <div class="logo">
+                <span class="logo-icon">⛏</span>
+                <span class="logo-text">TerrorClient</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#download" class="nav-download-btn">Download</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">v1.0.0</div>
+            <h1 class="hero-title">
+                <span class="gradient-text">TerrorClient</span>
+                <span class="hero-sub">Launcher</span>
+            </h1>
+            <p class="hero-desc">The ultimate Minecraft utility mod — seamless mod management,<br>one-click downloads & instant setup.</p>
+            <div class="hero-buttons">
+                <a href="TerrorClient-Setup.exe" class="download-btn" id="downloadBtn">
+                    <svg class="dl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Download Launcher
+                </a>
+                <a href="#features" class="ghost-btn">Learn More</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-num" data-target="33">0</span>
+                    <span class="stat-label">Built-in Mods</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-num" data-target="1">0</span>
+                    <span class="stat-label">Click Setup</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-num" data-target="100">0</span>
+                    <span class="stat-label">% Free</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"><div class="wheel"></div></div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="section-header">
+            <span class="section-badge">Features</span>
+            <h2>Everything You Need</h2>
+            <p>Built for performance, designed for players.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>One-Click Install</h3>
+                <p>Download the launcher, pick your folder, and you're ready to play. No manual mod setup required.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Auto Updates</h3>
+                <p>New mod versions? The launcher downloads and installs them automatically — always up to date.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3>33+ Preloaded Mods</h3>
+                <p>Comes packed with Sodium, Iris, Lithium, FerriteCore, and more — all pre-configured for best performance.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Microsoft Login</h3>
+                <p>Full Microsoft OAuth authentication. Login with your official Minecraft account securely.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📦</div>
+                <h3>Version Manager</h3>
+                <p>Browse and download any Minecraft version from the official manifest. Switch versions anytime.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3>Pre-configured</h3>
+                <p>Optimal settings out of the box — shader support, performance tweaks, and quality-of-life improvements.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="screenshots">
+        <div class="section-header">
+            <span class="section-badge">Gallery</span>
+            <h2>See It In Action</h2>
+            <p>The launcher experience, crafted with care.</p>
+        </div>
+        <div class="screenshot-carousel">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="slide">
+                    <div class="slide-inner">
+                        <div class="slide-placeholder" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+                            <div class="mock-screenshot">
+                                <div class="mock-nav"><span></span><span></span><span></span></div>
+                                <div class="mock-content">
+                                    <div class="mock-sidebar"></div>
+                                    <div class="mock-main">
+                                        <div class="mock-card"></div>
+                                        <div class="mock-card"></div>
+                                        <div class="mock-card"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="slide-label">Launcher Dashboard</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-inner">
+                        <div class="slide-placeholder" style="background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);">
+                            <div class="mock-screenshot version-mock">
+                                <div class="mock-nav"><span></span><span></span><span></span></div>
+                                <div class="mock-list">
+                                    <div class="mock-list-item"></div>
+                                    <div class="mock-list-item"></div>
+                                    <div class="mock-list-item active"></div>
+                                    <div class="mock-list-item"></div>
+                                </div>
+                            </div>
+                            <span class="slide-label">Version Manager</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-inner">
+                        <div class="slide-placeholder" style="background: linear-gradient(135deg, #42275a 0%, #734b6d 100%);">
+                            <div class="mock-screenshot auth-mock">
+                                <div class="mock-nav"><span></span><span></span><span></span></div>
+                                <div class="mock-auth">
+                                    <div class="mock-avatar"></div>
+                                    <div class="mock-name"></div>
+                                    <div class="mock-btn"></div>
+                                </div>
+                            </div>
+                            <span class="slide-label">Microsoft Login</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-dots" id="carouselDots">
+                <button class="dot active" data-index="0"></button>
+                <button class="dot" data-index="1"></button>
+                <button class="dot" data-index="2"></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="download">
+        <div class="download-content">
+            <div class="section-header">
+                <span class="section-badge">Get Started</span>
+                <h2>Ready to Play?</h2>
+                <p>Download the launcher and join thousands of players.</p>
+            </div>
+            <div class="download-card">
+                <div class="dc-icon">⬇</div>
+                <h3>TerrorClient Launcher v1.0.0</h3>
+                <p>Windows • 490 MB • Includes all mods & configs</p>
+                <a href="TerrorClient-Setup.exe" class="download-btn big" id="downloadBtn2">
+                    <svg class="dl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download Now
+                </a>
+                <div class="dc-footer">
+                    <span>🔒 Safe & Secure</span>
+                    <span>⚡ Instant Setup</span>
+                    <span>🆓 Free Forever</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-icon">⛏</span>
+                <span>TerrorClient</span>
+            </div>
+            <p class="footer-desc">Not affiliated with Mojang Studios or Microsoft. Minecraft is a registered trademark of Mojang AB.</p>
+            <div class="footer-links">
+                <a href="https://github.com" target="_blank">GitHub</a>
+                <a href="#">Discord</a>
+                <a href="#">Contact</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 TerrorClient. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
