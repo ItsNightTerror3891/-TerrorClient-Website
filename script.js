@@ -1,59 +1,27 @@
 const canvas = document.getElementById('mcCanvas');
 const ctx = canvas.getContext('2d');
-const terrainCanvas = document.createElement('canvas');
-const terrainCtx = terrainCanvas.getContext('2d');
 let W, H;
 
 function resize() {
     W = canvas.width = window.innerWidth;
     H = canvas.height = window.innerHeight;
-    terrainCanvas.width = W;
-    terrainCanvas.height = H;
-    drawTerrain();
 }
 resize();
 window.addEventListener('resize', resize);
 
-const BS = 16;
-const col = {
-    grass: ['#4a7c3f','#3d6b34','#5a8f4f','#2d5a24'],
-    dirt: ['#6b4c2a','#5a3e22','#7a5c32','#4d341c'],
-    stone: ['#7a7a7a','#6a6a6a','#8a8a8a','#5a5a5a']
-};
-
-function drawBlock(x, y, c) {
-    const idx = (Math.floor(x/BS)*7 + Math.floor(y/BS)*13) % c.length;
-    terrainCtx.fillStyle = c[idx];
-    terrainCtx.fillRect(x, y, BS, BS);
-    terrainCtx.strokeStyle = 'rgba(0,0,0,0.15)';
-    terrainCtx.lineWidth = 1;
-    terrainCtx.strokeRect(x, y, BS, BS);
-}
-
-function drawTerrain() {
-    terrainCtx.clearRect(0, 0, W, H);
-    const groundY = Math.floor(H * 0.78);
-    const grassY = groundY - BS * 2;
-    const dirtY = groundY - BS;
-    for (let x = 0; x <= W + BS; x += BS) drawBlock(x, grassY, col.grass);
-    for (let x = 0; x <= W + BS; x += BS) drawBlock(x, dirtY, col.dirt);
-    for (let y = groundY; y < H; y += BS)
-        for (let x = 0; x <= W + BS; x += BS) drawBlock(x, y, col.stone);
-}
-
 function render(time) {
-    const groundY = Math.floor(H * 0.78);
-    const skyGrad = ctx.createLinearGradient(0, 0, 0, groundY);
+    const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
     const t = (Math.sin(time*0.0002)*0.5+0.5)*0.2+0.15;
     skyGrad.addColorStop(0, `hsl(225, 25%, ${14+t*10}%)`);
     skyGrad.addColorStop(0.5, `hsl(220, 20%, ${18+t*8}%)`);
     skyGrad.addColorStop(1, `hsl(210, 15%, ${22+t*6}%)`);
     ctx.fillStyle = skyGrad;
-    ctx.fillRect(0, 0, W, groundY);
+    ctx.fillRect(0, 0, W, H);
+
     if (!render.stars) {
         render.stars = [];
-        for (let i = 0; i < 100; i++) render.stars.push({
-            x: Math.random()*W, y: Math.random()*groundY*0.6,
+        for (let i = 0; i < 120; i++) render.stars.push({
+            x: Math.random()*W, y: Math.random()*H*0.6,
             r: Math.random()*1.5+0.5, sp: Math.random()*0.5+0.2
         });
     }
@@ -65,7 +33,6 @@ function render(time) {
         ctx.fill();
     });
     ctx.globalAlpha = 1;
-    ctx.drawImage(terrainCanvas, 0, 0);
     requestAnimationFrame(render);
 }
 requestAnimationFrame(render);
