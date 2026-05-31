@@ -197,7 +197,10 @@ section { position: relative; z-index: 2; padding: 100px 24px; }
     aspect-ratio: 16/10;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     position: relative;
+    overflow: hidden;
+    background: #0a0a0f;
 }
+.screenshot-img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .slide-label { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.5); padding: 6px 16px; border-radius: 8px; backdrop-filter: blur(4px); }
 
 .mock-screenshot { width: 80%; max-width: 500px; background: rgba(0,0,0,0.4); border-radius: 8px; padding: 12px; border: 1px solid rgba(255,255,255,0.06); }
