@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TerrorClient Launcher</title>
+    <title>TerrorClient — Minecraft Utility Mod</title>
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -20,7 +20,8 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
-                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#mods">Mods</a></li>
+                <li><a href="#screenshots">Gallery</a></li>
                 <li><a href="#download" class="nav-download-btn">Download</a></li>
             </ul>
             <button class="hamburger" id="hamburger">
@@ -31,18 +32,15 @@
 
     <section id="hero">
         <div class="hero-content">
-            <div class="hero-badge">v1.0.0</div>
+            <div class="hero-badge">v1.0.0 — Minecraft 1.21.11</div>
             <h1 class="hero-title">
                 <span class="gradient-text">TerrorClient</span>
-                <span class="hero-sub">Launcher</span>
             </h1>
-            <p class="hero-desc">The ultimate Minecraft utility mod — seamless mod management,<br>one-click downloads & instant setup.</p>
+            <p class="hero-desc">The ultimate all-in-one Minecraft utility mod — performance, visuals,<br>HUD, and quality-of-life enhancements in a single package.</p>
             <div class="hero-buttons">
-                <a href="TerrorClient-Setup.exe" class="download-btn" id="downloadBtn">
+                <a href="https://github.com/ItsNightTerror3891/TerrorClient/releases/tag/TerrorClient" class="download-btn" id="downloadBtn">
                     <svg class="dl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                        <polyline points="7 10 12 15 17 10"/>
-                        <line x1="12" y1="15" x2="12" y2="3"/>
+                        <path d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1m-4-4-4 4m0 0-4-4m4 4V4"/>
                     </svg>
                     Download Launcher
                 </a>
@@ -50,12 +48,12 @@
             </div>
             <div class="hero-stats">
                 <div class="stat">
-                    <span class="stat-num" data-target="33">0</span>
-                    <span class="stat-label">Built-in Mods</span>
+                    <span class="stat-num" data-target="40">0</span>
+                    <span class="stat-label">Features</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-num" data-target="1">0</span>
-                    <span class="stat-label">Click Setup</span>
+                    <span class="stat-num" data-target="11">0</span>
+                    <span class="stat-label">Bundled Mods</span>
                 </div>
                 <div class="stat">
                     <span class="stat-num" data-target="100">0</span>
@@ -72,38 +70,128 @@
         <div class="section-header">
             <span class="section-badge">Features</span>
             <h2>Everything You Need</h2>
-            <p>Built for performance, designed for players.</p>
+            <p>40+ features — all toggleable, all configurable.</p>
         </div>
         <div class="features-grid">
             <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>HUD Widgets</h3>
+                <p>FPS, CPS, coordinates, ping, TPS, speed, armor, potions, memory, reach, server info — all draggable and customizable.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👁️</div>
+                <h3>Visual Enhancements</h3>
+                <p>Zoom (smooth), FreeLook, Fullbright, block/entity highlight, fire height adjustment, better visibility in nether/water/lava.</p>
+            </div>
+            <div class="feature-card">
                 <div class="feature-icon">⚡</div>
-                <h3>One-Click Install</h3>
-                <p>Download the launcher, pick your folder, and you're ready to play. No manual mod setup required.</p>
+                <h3>Performance</h3>
+                <p>Particle culling (>24 blocks), entity distance scaling (50%), auto-throttle at low FPS, FerriteCore memory optimization.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🔄</div>
-                <h3>Auto Updates</h3>
-                <p>New mod versions? The launcher downloads and installs them automatically — always up to date.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎮</div>
-                <h3>33+ Preloaded Mods</h3>
-                <p>Comes packed with Sodium, Iris, Lithium, FerriteCore, and more — all pre-configured for best performance.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔐</div>
-                <h3>Microsoft Login</h3>
-                <p>Full Microsoft OAuth authentication. Login with your official Minecraft account securely.</p>
+                <div class="feature-icon">🛡️</div>
+                <h3>Quality of Life</h3>
+                <p>Toggle Sneak/Sprint, No Bob, Death coords in chat, status indicators, waypoint system, AppleSkin food overlay.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">📦</div>
-                <h3>Version Manager</h3>
-                <p>Browse and download any Minecraft version from the official manifest. Switch versions anytime.</p>
+                <h3>Bundled Mods</h3>
+                <p>EntityCulling, Continuity, Wavey Capes, Client Kits, Armor HUD, SmallViewModel, AppleSkin, and more — all pre-configured.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">⚙️</div>
-                <h3>Pre-configured</h3>
-                <p>Optimal settings out of the box — shader support, performance tweaks, and quality-of-life improvements.</p>
+                <div class="feature-icon">🎨</div>
+                <h3>Customization</h3>
+                <p>View model tweaks (hand/arm position/scale), custom capes, shader support, held item tooltip, shulker preview, resource pack browser.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⌨️</div>
+                <h3>Keybinds</h3>
+                <p>RIGHT_SHIFT for menu, C for zoom, G for fullbright, H for night vision, LEFT ALT for freeLook. All rebindable.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🖥️</div>
+                <h3>HUD Editor</h3>
+                <p>Drag-and-drop positioning for all HUD elements. Custom colors, opacity, scale, shadows, and per-widget settings.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="mods">
+        <div class="section-header">
+            <span class="section-badge">Included</span>
+            <h2>Bundled Mods</h2>
+            <p>All dependencies included in one jar — no separate downloads needed.</p>
+        </div>
+        <div class="mods-list">
+            <div class="mod-item">
+                <div class="mod-icon">🎯</div>
+                <div class="mod-info">
+                    <span class="mod-name">EntityCulling</span>
+                    <span class="mod-desc">Stops rendering entities/block entities behind walls</span>
+                </div>
+            </div>
+            <div class="mod-item">
+                <div class="mod-icon">🔗</div>
+                <div class="mod-info">
+                    <span class="mod-name">Continuity</span>
+                    <span class="mod-desc">Connected textures for glass, sandstone, bookshelves, and more</span>
+                </div>
+            </div>
+            <div class="mod-item">
+                <div class="mod-icon">🧣</div>
+                <div class="mod-info">
+                    <span class="mod-name">Wavey Capes</span>
+                    <span class="mod-desc">Animated cape physics for cosmetic capes</span>
+                </div>
+            </div>
+            <div class="mod-item">
+                <div class="mod-icon">🖐️</div>
+                <div class="mod-info">
+                    <span class="mod-name">SmallViewModel</span>
+                    <span class="mod-desc">Adjust hand/item position, rotation, and scale</span>
+                </div>
+            </div>
+            <div class="mod-item">
+                <div class="mod-icon">🍎</div>
+                <div class="mod-info">
+                    <span class="mod-name">AppleSkin</span>
+                    <span class="mod-desc">Food saturation, hunger, and health preview overlays</span>
+                </div>
+            </div>
+            <div class="mod-item">
+                <div class="mod-icon">🛡️</div>
+                <div class="mod-info">
+                    <span class="mod-name">Armor HUD</span>
+                    <span class="mod-desc">Armor and durability display widget</span>
+                </div>
+            </div>
+            <div class="mod-item">
+                <div class="mod-icon">🧩</div>
+                <div class="mod-info">
+                    <span class="mod-name">Client Kits</span>
+                    <span class="mod-desc">UI framework and rendering library</span>
+                </div>
+            </div>
+            <div class="mod-item">
+                <div class="mod-icon">🧊</div>
+                <div class="mod-info">
+                    <span class="mod-name">FerriteCore</span>
+                    <span class="mod-desc">Memory optimization — reduces RAM usage</span>
+                </div>
+            </div>
+            <div class="mod-item">
+                <div class="mod-icon">📐</div>
+                <div class="mod-info">
+                    <span class="mod-name">Lattice</span>
+                    <span class="mod-desc">In-game configuration UI library</span>
+                </div>
+            </div>
+            <div class="mod-item">
+                <div class="mod-icon">🧵</div>
+                <div class="mod-info">
+                    <span class="mod-name">MixinExtras</span>
+                    <span class="mod-desc">Advanced mixin utilities for mod compatibility</span>
+                </div>
             </div>
         </div>
     </section>
@@ -112,31 +200,31 @@
         <div class="section-header">
             <span class="section-badge">Gallery</span>
             <h2>See It In Action</h2>
-            <p>The launcher experience, crafted with care.</p>
+            <p>The mod experience, crafted with care.</p>
         </div>
         <div class="screenshot-carousel">
             <div class="carousel-track" id="carouselTrack">
                 <div class="slide">
                     <div class="slide-inner">
                         <div class="slide-placeholder">
-                            <img src="ss1.png" alt="Launcher Dashboard" class="screenshot-img">
-                            <span class="slide-label">Launcher Dashboard</span>
+                            <img src="ss1.png" alt="TerrorClient Menu" class="screenshot-img">
+                            <span class="slide-label">Main Menu</span>
                         </div>
                     </div>
                 </div>
                 <div class="slide">
                     <div class="slide-inner">
                         <div class="slide-placeholder">
-                            <img src="ss2.png" alt="Mod Configuration" class="screenshot-img">
-                            <span class="slide-label">Version Manager</span>
+                            <img src="ss2.png" alt="Modules Screen" class="screenshot-img">
+                            <span class="slide-label">Modules</span>
                         </div>
                     </div>
                 </div>
                 <div class="slide">
                     <div class="slide-inner">
                         <div class="slide-placeholder">
-                            <img src="ss3.png" alt="Features" class="screenshot-img">
-                            <span class="slide-label">Microsoft Login</span>
+                            <img src="ss3.png" alt="HUD Editor" class="screenshot-img">
+                            <span class="slide-label">HUD Editor</span>
                         </div>
                     </div>
                 </div>
@@ -154,19 +242,21 @@
             <div class="section-header">
                 <span class="section-badge">Get Started</span>
                 <h2>Ready to Play?</h2>
-                <p>Download the launcher and join thousands of players.</p>
+                <p>Download the launcher and play — all mods pre-installed, Fabric pre-configured, one-click setup.</p>
             </div>
             <div class="download-card">
-                <div class="dc-icon">⬇</div>
+                <div class="dc-icon">🚀</div>
                 <h3>TerrorClient Launcher v1.0.0</h3>
-                <p>Windows • 490 MB • Includes all mods & configs</p>
-                <a href="TerrorClient-Setup.exe" class="download-btn big" id="downloadBtn2">
-                    <svg class="dl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <p>115 MB • Extract and play — includes launcher + all mods + Fabric pre-configured</p>
+                <a href="https://github.com/ItsNightTerror3891/TerrorClient/releases/tag/TerrorClient" class="download-btn big">
+                    <svg class="dl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1m-4-4-4 4m0 0-4-4m4 4V4"/>
+                    </svg>
                     Download Now
                 </a>
                 <div class="dc-footer">
                     <span>🔒 Safe & Secure</span>
-                    <span>⚡ Instant Setup</span>
+                    <span>⚡ 1-Click Setup</span>
                     <span>🆓 Free Forever</span>
                 </div>
             </div>
@@ -181,7 +271,7 @@
             </div>
             <p class="footer-desc">Not affiliated with Mojang Studios or Microsoft. Minecraft is a registered trademark of Mojang AB.</p>
             <div class="footer-links">
-                <a href="https://github.com" target="_blank">GitHub</a>
+                <a href="https://github.com/ItsNightTerror/TerrorClient" target="_blank">GitHub</a>
                 <a href="#">Discord</a>
                 <a href="#">Contact</a>
             </div>
@@ -190,7 +280,6 @@
     </footer>
 
     <div class="cursor-glow" id="cursorGlow"></div>
-
     <script src="script.js"></script>
 </body>
 </html>
